@@ -32,13 +32,13 @@ testv: TestCollatz
 	valgrind TestCollatz
 
 turnin-list:
-	turnin --list tmtorres cs371ppj1
+	turnin --list tmtorres cs378pj1
 
 turnin-submit:
-	turnin --submit tmtorres cs371ppj1 Collatz.zip
+	turnin --submit tmtorres cs378pj1 Collatz.zip
 
 turnin-verify:
-	turnin --verify tmtorres cs371ppj1
+	turnin --verify tmtorres cs378pj1
 
 zip:
 	zip -r Collatz.zip html/ makefile           \
