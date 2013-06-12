@@ -34,7 +34,7 @@ To document the program:
 // includes
 // --------
 
-#include <iostream> // cin, cout, ios_base
+#include <iostream> // cin, cout
 
 #include "Collatz.h"
 
@@ -44,6 +44,5 @@ To document the program:
 
 int main () {
     using namespace std;
-    ios_base::sync_with_stdio(false); // turn off synchronization with C I/O
     collatz_solve(cin, cout);
     return 0;}
