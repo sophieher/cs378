@@ -29,14 +29,14 @@ Collatz.log:
 	git log > Collatz.log
 
 Collatz.zip: Collatz.c++ Collatz.h Collatz.log           \
-			 RunCollatz.c++ RunCollatz.in RunCollatz.out \
-			 SphereCollatz.c++                           \
-			 TestCollatz.c++ TestCollatz.out
-	zip -r Collatz.zip html/                    \
-	Collatz.c++ Collatz.h Collatz.log           \
-	RunCollatz.c++ RunCollatz.in RunCollatz.out \
-	SphereCollatz.c++                           \
-	TestCollatz.c++ TestCollatz.out
+             RunCollatz.c++ RunCollatz.in RunCollatz.out \
+             SphereCollatz.c++                           \
+             TestCollatz.c++ TestCollatz.out
+	zip -r Collatz.zip html/                           \
+           Collatz.c++ Collatz.h Collatz.log           \
+           RunCollatz.c++ RunCollatz.in RunCollatz.out \
+           SphereCollatz.c++                           \
+           TestCollatz.c++ TestCollatz.out
 
 RunCollatz: Collatz.h Collatz.c++ RunCollatz.c++
 	g++ -pedantic -std=c++0x -Wall Collatz.c++ RunCollatz.c++ -o RunCollatz
