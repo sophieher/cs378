@@ -5,8 +5,8 @@ clean:
 	rm -f Collatz.log
 	rm -f Collatz.zip
 	rm -f RunCollatz
+	rm -f RunCollatz.tmp
 	rm -f TestCollatz
-	rm -f *.tmp
 
 diff: RunCollatz RunCollatz.in RunCollatz.out
 	RunCollatz < RunCollatz.in > RunCollatz.tmp

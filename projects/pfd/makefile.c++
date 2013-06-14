@@ -5,8 +5,8 @@ clean:
 	rm -f PFD.log
 	rm -f PFD.zip
 	rm -f RunPFD
+	rm -f RunPFD.tmp
 	rm -f TestPFD
-	rm -f *.tmp
 
 diff: RunPFD RunPFD.in RunPFD.out
 	RunPFD < RunPFD.in > RunPFD.tmp
