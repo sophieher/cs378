@@ -1,53 +1,51 @@
 all:
-	make run
-	make test
+	make Collatz.zip
 
-diff: RunCollatz
+clean:
+	rm -f Collatz.log
+	rm -f Collatz.zip
+	rm -f RunCollatz
+	rm -f TestCollatz
+	rm -f *.tmp
+
+diff: RunCollatz RunCollatz.in RunCollatz.out
 	RunCollatz < RunCollatz.in > RunCollatz.tmp
 	diff RunCollatz.out RunCollatz.tmp
 	rm RunCollatz.tmp
 
-doc:
+doc: Collatz.c++
 	doxygen Doxyfile
-
-log:
-	git log > Collatz.log
-
-RunCollatz: Collatz.h Collatz.c++ RunCollatz.c++
-	g++ -pedantic -std=c++0x -Wall Collatz.c++ RunCollatz.c++ -o RunCollatz
-
-run: RunCollatz
-	RunCollatz < RunCollatz.in
-
-runv: RunCollatz
-	valgrind RunCollatz < RunCollatz.in
-
-TestCollatz: Collatz.h Collatz.c++ TestCollatz.c++
-	g++ -pedantic -std=c++0x -Wall Collatz.c++ TestCollatz.c++ -o TestCollatz -lcppunit -ldl
-
-test: TestCollatz
-	TestCollatz
-
-testv: TestCollatz
-	valgrind TestCollatz
 
 turnin-list:
 	turnin --list tmtorres cs378pj1
 
-turnin-submit:
+turnin-submit: Collatz.zip
 	turnin --submit tmtorres cs378pj1 Collatz.zip
 
 turnin-verify:
 	turnin --verify tmtorres cs378pj1
 
-zip:
-	zip -r Collatz.zip html/ makefile           \
+Collatz.log:
+	git log > Collatz.log
+
+Collatz.zip: Collatz.c++ Collatz.h Collatz.log           \
+			 RunCollatz.c++ RunCollatz.in RunCollatz.out \
+			 SphereCollatz.c++                           \
+			 TestCollatz.c++ TestCollatz.out
+	zip -r Collatz.zip html/                    \
 	Collatz.c++ Collatz.h Collatz.log           \
 	RunCollatz.c++ RunCollatz.in RunCollatz.out \
 	SphereCollatz.c++                           \
 	TestCollatz.c++ TestCollatz.out
 
-clean:
-	rm -f RunCollatz
-	rm -f TestCollatz
-	rm -f *.tmp
+RunCollatz: Collatz.h Collatz.c++ RunCollatz.c++
+	g++ -pedantic -std=c++0x -Wall Collatz.c++ RunCollatz.c++ -o RunCollatz
+
+RunCollatz.out: RunCollatz RunCollatz.in
+	valgrind RunCollatz < RunCollatz.in >& RunCollatz.out
+
+TestCollatz: Collatz.h Collatz.c++ TestCollatz.c++
+	g++ -pedantic -std=c++0x -Wall Collatz.c++ TestCollatz.c++ -o TestCollatz -lcppunit -ldl
+
+TestCollatz.out: TestCollatz
+	valgrind TestCollatz >& TestCollatz.out
