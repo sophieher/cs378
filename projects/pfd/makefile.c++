@@ -17,13 +17,13 @@ doc: PFD.c++
 	doxygen Doxyfile
 
 turnin-list:
-	turnin --list tmtorres cs378pj1
+	turnin --list tmtorres cs378pj2
 
 turnin-submit: PFD.zip
-	turnin --submit tmtorres cs378pj1 PFD.zip
+	turnin --submit tmtorres cs378pj2 PFD.zip
 
 turnin-verify:
-	turnin --verify tmtorres cs378pj1
+	turnin --verify tmtorres cs378pj2
 
 PFD.log:
 	git log > PFD.log
