@@ -13,7 +13,7 @@ To test the program:
     % locate libcppunit.a
     /usr/lib/libcppunit.a
     % g++ -pedantic -std=c++0x -Wall Collatz.c++ TestCollatz.c++ -o TestCollatz -lcppunit -ldl
-    % valgrind TestCollatz >& TestCollatz.out
+    % valgrind TestCollatz &> TestCollatz.out
 */
 
 // --------
