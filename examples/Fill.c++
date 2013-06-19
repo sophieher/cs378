@@ -25,13 +25,6 @@ int main () {
     {
           char a[] = "abCbA";
     const int  s   = strlen(a);
-    fill(a, a + s, 'x');
-    assert(strcmp(a, "xxxxx") == 0);
-    }
-
-    {
-          char a[] = "abCbA";
-    const int  s   = strlen(a);
     fill_1(a, a + s, 'x');
     assert(strcmp(a, "xxxxx") == 0);
     }
@@ -40,6 +33,13 @@ int main () {
           char a[] = "abCbA";
     const int  s   = strlen(a);
     fill_2(a, a + s, 'x');
+    assert(strcmp(a, "xxxxx") == 0);
+    }
+
+    {
+          char a[] = "abCbA";
+    const int  s   = strlen(a);
+    fill(a, a + s, 'x');
     assert(strcmp(a, "xxxxx") == 0);
     }
 
