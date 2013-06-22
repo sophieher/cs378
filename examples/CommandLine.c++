@@ -3,7 +3,8 @@
 // ---------------
 
 /*
-% CommandLine.c++.app Nothing to be done.
+% g++ -pedantic -std=c++0x -Wall CommandLine.c++ -o CommandLine
+% CommandLine Nothing to be done.
 */
 
 #include <algorithm> // equal
