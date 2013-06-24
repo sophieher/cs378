@@ -1,19 +1,19 @@
-#include <iostream> // cout, endl
-
+#include <functional>
+#include <iostream>
+#include <vector>
 
 int main () {
     using namespace std;
     cout << "Test.c++" << endl;
 
-    char c = '.';
+    vector<int> x(10, 2);
+    cout << x[3];
 
-    if (c == '.')
-        a[i][j] = ConwayCell();
-    else if (c
+    for (int v : x) {
+        cout << v << endl;}
 
-    // Cell
-    if (c == '-')
-        a[i][j] = new FredkinCell(false);
+    std::reference_wrapper<int> y = x;
+
 
     cout << "Done." << endl;
     return 0;}
