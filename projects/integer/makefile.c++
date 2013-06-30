@@ -8,8 +8,8 @@ clean:
 	rm -f RunInteger.tmp
 	rm -f TestInteger
 
-diff: RunInteger RunInteger.in RunInteger.out
-	RunInteger < RunInteger.in > RunInteger.tmp
+diff: RunInteger RunInteger.out
+	RunInteger > RunInteger.tmp
 	diff RunInteger.out RunInteger.tmp
 	rm RunInteger.tmp
 
@@ -28,14 +28,14 @@ turnin-verify:
 Integer.log:
 	git log > Integer.log
 
-Integer.zip: Integer.h Integer.log RunInteger.c++ RunInteger.in RunInteger.out SphereInteger.c++ TestInteger.c++ TestInteger.out
-	zip -r Integer.zip html/ Integer.h Integer.log RunInteger.c++ RunInteger.in RunInteger.out SphereInteger.c++ TestInteger.c++ TestInteger.out
+Integer.zip: Integer.h Integer.log RunInteger.c++ RunInteger.out TestInteger.c++ TestInteger.out
+	zip -r Integer.zip html/ Integer.h Integer.log RunInteger.c++ RunInteger.out TestInteger.c++ TestInteger.out
 
 RunInteger: Integer.h RunInteger.c++
 	g++ -pedantic -std=c++0x -Wall RunInteger.c++ -o RunInteger
 
-RunInteger.out: RunInteger RunInteger.in
-	valgrind RunInteger < RunInteger.in > RunInteger.out
+RunInteger.out: RunInteger
+	valgrind RunInteger > RunInteger.out
 
 TestInteger: Integer.h TestInteger.c++
 	g++ -pedantic -std=c++0x -Wall TestInteger.c++ -o TestInteger -lcppunit -ldl
