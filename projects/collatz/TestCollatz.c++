@@ -20,7 +20,7 @@ To test the program:
 // includes
 // --------
 
-#include <iostream> // cout, endl, ios_base
+#include <iostream> // cout, endl
 #include <sstream>  // istringtstream, ostringstream
 #include <string>   // ==
 
@@ -107,7 +107,6 @@ struct TestCollatz : CppUnit::TestFixture {
 
 int main () {
     using namespace std;
-    ios_base::sync_with_stdio(false);  // turn off synchronization with C I/O
     cout << "TestCollatz.c++" << endl;
 
     CppUnit::TextTestRunner tr;
