@@ -28,7 +28,7 @@
  * @return  an iterator to the end       of an output sequence (exclusive)
  * the sequences are of decimal digits
  * output the shift left of the input sequence into the output sequence
- * (s << n) => x
+ * ([b, e) << n) => x
  */
 template <typename II, typename OI>
 OI shift_left_digits (II b, II e, int n, OI x) {
@@ -46,7 +46,7 @@ OI shift_left_digits (II b, II e, int n, OI x) {
  * @return  an iterator to the end       of an output sequence (exclusive)
  * the sequences are of decimal digits
  * output the shift right of the input sequence into the output sequence
- * (s >> n) => x
+ * ([b, e) >> n) => x
  */
 template <typename II, typename OI>
 OI shift_right_digits (II b, II e, int n, OI x) {
@@ -66,7 +66,7 @@ OI shift_right_digits (II b, II e, int n, OI x) {
  * @return   an iterator to the end       of an output sequence (exclusive)
  * the sequences are of decimal digits
  * output the sum of the two input sequences into the output sequence
- * (s1 + s2) => x
+ * ([b1, e1) + [b2, e2)) => x
  */
 template <typename II1, typename II2, typename OI>
 OI plus_digits (II1 b1, II1 e1, II2 b2, II2 e2, OI x) {
@@ -86,7 +86,7 @@ OI plus_digits (II1 b1, II1 e1, II2 b2, II2 e2, OI x) {
  * @return   an iterator to the end       of an output sequence (exclusive)
  * the sequences are of decimal digits
  * output the difference of the two input sequences into the output sequence
- * (s1 - s2) => x
+ * ([b1, e1) - [b2, e2)) => x
  */
 template <typename II1, typename II2, typename OI>
 OI minus_digits (II1 b1, II1 e1, II2 b2, II2 e2, OI x) {
@@ -106,7 +106,7 @@ OI minus_digits (II1 b1, II1 e1, II2 b2, II2 e2, OI x) {
  * @return   an iterator to the end       of an output sequence (exclusive)
  * the sequences are of decimal digits
  * output the product of the two input sequences into the output sequence
- * (s1 * s2) => x
+ * ([b1, e1) * [b2, e2)) => x
  */
 template <typename II1, typename II2, typename OI>
 OI multiplies_digits (II1 b1, II1 e1, II2 b2, II2 e2, OI x) {
@@ -126,7 +126,7 @@ OI multiplies_digits (II1 b1, II1 e1, II2 b2, II2 e2, OI x) {
  * @return   an iterator to the end       of an output sequence (exclusive)
  * the sequences are of decimal digits
  * output the division of the two input sequences into the output sequence
- * (s1 / s2) => x
+ * ([b1, e1) / [b2, e2)) => x
  */
 template <typename II1, typename II2, typename OI>
 OI divides_digits (II1 b1, II1 e1, II2 b2, II2 e2, OI x) {
