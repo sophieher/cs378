@@ -7,10 +7,20 @@
 #include <cstddef>   // ptrdiff_t, size_t
 #include <iostream>  // cout, endl
 #include <memory>    // allocator, uninitialized_fill
+#include <string>    // string
 #include <vector>    // vector
 
-struct A     {int i; void f () {}};
-struct B : A {int j; void f () {}};
+struct A {
+    int i;
+
+    std::string f () {
+        return "A::f";}};
+
+struct B : A {
+    int j;
+
+    std::string f () {
+        return "B::f";}};
 
 void f1 (int p[]) {
     assert(sizeof(p) == 8);
@@ -117,6 +127,7 @@ int main () {
     const ptrdiff_t  s = 10;
     const int        v =  2;
           int* const a = new int[s];
+    assert(sizeof(a) == 8);
     fill(a, a + s, v);
     assert(count(a, a + s, v) == s);
     assert(a[1] == v);
@@ -131,6 +142,7 @@ int main () {
     const size_t     s = 10;
     const int        v =  2;
           int* const a = new int[s];
+    assert(sizeof(a) == 8);
     fill(a, a + s, v);
     int* const b = a;
     assert(&a[1] == &b[1]);
@@ -146,6 +158,7 @@ int main () {
     const size_t     s = 10;
     const int        v =  2;
           int* const a = new int[s];
+    assert(sizeof(a) == 8);
     fill(a, a + s, v);
     int* b = new int[s];
     fill(b, b + s, v);
@@ -162,6 +175,7 @@ int main () {
     const ptrdiff_t  s = 10;
     const int        v =  2;
           int* const a = x.allocate(s);
+    assert(sizeof(a) == 8);
     int* b = a;
     int* e = a + s;
     while (b != e) {
@@ -176,43 +190,38 @@ int main () {
     }
 
     {
+//  B a[] = {A(), A(), A()};    // error: conversion from "A" to non-scalar type "B" requested
+    A a[] = {B(), B(), B()};    // slice
+    assert(a[1].f() == "A::f");
+    }
+    {
 //  int*    const a = new double[10]; // error: cannot convert 'double*' to 'int*    const' in initialization
 //  double* const a = new int[10];    // error: cannot convert 'int*'    to 'double* const' in initialization
     }
 
     {
-//  B a[] = {A(), A(), A()}; // error: conversion from "A" to non-scalar type "B" requested
+//  B* const a = new A[10];                      // error: invalid conversion from ‘A*’ to ‘B*’
+    A* const a = new B[10];                      // dangerous
+    assert(a[0].f() == "A::f");
+//  assert(a[1].f() == "A::f");                  // undefined
+//  delete [] a;                                 // undefined
+    assert(static_cast<B*>(a)[1].f() == "B::f");
+    delete [] static_cast<B*>(a);                // ~B::B() and ~A::A()
     }
 
     {
-    A a[] = {B(), B(), B()}; // slice
-    a[1].f();                // A::f();
-    }
-
-    {
-    A* const a = new B[10];       // dangerous
-    a[0].f();                     // A::f()
-//  a[1].f();                     // undefined
-//  delete [] a;                  // undefined
-    static_cast<B*>(a)[1].f();    // B::f()
-    delete [] static_cast<B*>(a); // ~B::B() and ~A::A()
-    }
-
-    {
-    const  size_t     s = 10;
+    const size_t      s = 10;
     const int         v =  2;
           vector<int> x(s, v);
     assert(x.size() == s);
     assert(x[0]     == v);
     vector<int> y(x);
-    assert(x.size() == y.size());
-    assert( x[1]    ==  y[1]);
-    assert(&x[1]    != &y[1]);
+    assert( x ==  y);
+    assert(&x != &y);
     vector<int> z(2 * s, v);
     x = z;
-    assert(x.size() == z.size());
-    assert( x[1]    ==  z[1]);
-    assert(&x[1]    != &z[1]);
+    assert( x ==  z);
+    assert(&x != &z);
     }
 
     {
