@@ -6,6 +6,16 @@
 
 /*
 To test the program:
+    % ls -al /usr/include/gtest/
+    ...
+    gtest.h
+    ...
+    % locate libgtest.a
+    /usr/lib/libgtest.a
+    % g++ -pedantic -std=c++0x -Wall Collatz.c++ TestCollatz.c++ -o TestCollatz -lgtest -ldl
+    % valgrind TestCollatz > TestCollatz.out
+
+To test the program:
     % ls /usr/include/cppunit/
     ...
     TestFixture.h
