@@ -10,9 +10,19 @@ To test the program:
     ...
     gtest.h
     ...
+
     % locate libgtest.a
     /usr/lib/libgtest.a
-    % g++ -pedantic -std=c++0x -Wall Collatz.c++ TestCollatz.c++ -o TestCollatz -lgtest_main
+
+    % locate libpthread.a
+    /usr/lib/x86_64-linux-gnu/libpthread.a
+    /usr/lib32/libpthread.a
+
+    % locate libgtest_main.a
+    /usr/lib/libgtest_main.a
+
+    % g++ -pedantic -std=c++0x -Wall Collatz.c++ TestCollatz.c++ -o TestCollatz -lgtest -lpthread -lgtest_main
+
     % valgrind TestCollatz > TestCollatz.out
 */
 
