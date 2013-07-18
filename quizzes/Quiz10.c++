@@ -1,5 +1,5 @@
 /*
-CS378: Quiz #10 (9 pts) <Tom>
+CS378: Quiz #10 (10 pts) <Tom>
 */
 
 #include <cassert>  // assert
