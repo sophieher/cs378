@@ -10,10 +10,11 @@
 
 template <typename RI>
 void my_reverse (RI b, RI e) {
+    --e;
     while (b < e) {
-        --e;
         std::swap(*b, *e);
-        ++b;}}
+        ++b;
+        --e;}}
 
 int main () {
     using namespace std;
