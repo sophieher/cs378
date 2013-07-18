@@ -16,7 +16,7 @@ int main () {
     cout << "StackVsHeap.c++" << endl;
 
     {
-    assert(f(1234567L) == 1234567L); // 12345678L will fail
+    assert(f(1234567) == 1234567); // 12345678L will fail
     }
 
     try {

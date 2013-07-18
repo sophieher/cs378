@@ -53,7 +53,7 @@ int main () {
         s = i;
     else
         s = i + 1;
-//  assert(i == 2); // error: 'i' was not declared in this scope
+//  assert(i == 2); // compilation error: 'i' was not declared in this scope
     assert(s == 2);
     }
 

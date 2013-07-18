@@ -205,6 +205,7 @@ int main () {
     assert(i == 11);
     }
 
+	// xor swap  a^= b b^=a a^=b
     {
     int i = 10;      // 1010
     int j = 12;      // 1100
@@ -219,6 +220,7 @@ int main () {
     assert(j == 10); // 1010
     }
 
+	// arith swap  a += b b = a - b a -= b 
     {
     int i = 10;
     int j = 12;
