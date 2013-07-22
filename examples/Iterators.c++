@@ -2,7 +2,6 @@
 // Iterators.c++
 // -------------
 
-#include <algorithm> // lexicographical_compare
 #include <cassert>   // assert
 #include <cstddef>   // ptrdiff_t, size_t
 #include <iostream>  // cout, endl
@@ -122,9 +121,8 @@ void test () {
     *b = 4;
     assert(*b == 4);
     ++b;
-    assert(b == e);
-    assert(!(b != e));
-    assert(!std::lexicographical_compare(b, b, e, e));}
+    assert(  b == e);
+    assert(!(b != e));}
 
 int main () {
     using namespace std;
