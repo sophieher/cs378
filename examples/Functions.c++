@@ -39,29 +39,27 @@ struct multiplies_4 {
         return x * y;}};
 
 int f (int (*bf) (int, int), int x, int y, int z) {
-    assert(bf         == *bf);
-    assert(sizeof(bf) == 8);
     return bf(bf(x, y), z);}
 
 template <typename BF, typename T>
 T g (BF bf, const T& x, const T& y, const T& z) {
-    assert(sizeof(bf) == 8);
-    return bf(bf(x, y), z);}
-
-template <typename BF, typename T>
-T h (BF bf, const T& x, const T& y, const T& z) {
-    assert(sizeof(bf) == 1);
     return bf(bf(x, y), z);}
 
 int main () {
     using namespace std;
     cout << "Functions.c++" << endl;
 
+    assert(plus_1          == *plus_1);
+    assert(plus_1          == &plus_1);
+    assert(sizeof(&plus_1) == 8);
+
     assert(plus_1      (2, 3) == 5);
     assert(multiplies_1(2, 3) == 6);
 
     assert(plus_2      (2, 3) == 5);
     assert(multiplies_2(2, 3) == 6);
+
+    assert(sizeof(plus_3) == 1);
 
     assert(plus_3()      (2, 3) == 5);
     assert(multiplies_3()(2, 3) == 6);
@@ -101,14 +99,14 @@ int main () {
     assert(g(&plus_2<int>,       2, 3, 4) ==  9);
     assert(g(&multiplies_2<int>, 2, 3, 4) == 24);
 
-    assert(h(plus_3(),       2, 3, 4) ==  9);
-    assert(h(multiplies_3(), 2, 3, 4) == 24);
+    assert(g(plus_3(),       2, 3, 4) ==  9);
+    assert(g(multiplies_3(), 2, 3, 4) == 24);
 
-    assert(h(plus_4<int>(),       2, 3, 4) ==  9);
-    assert(h(multiplies_4<int>(), 2, 3, 4) == 24);
+    assert(g(plus_4<int>(),       2, 3, 4) ==  9);
+    assert(g(multiplies_4<int>(), 2, 3, 4) == 24);
 
-    assert(h(plus<int>(),       2, 3, 4) ==  9);
-    assert(h(multiplies<int>(), 2, 3, 4) == 24);
+    assert(g(plus<int>(),       2, 3, 4) ==  9);
+    assert(g(multiplies<int>(), 2, 3, 4) == 24);
 
     cout << "Done." << endl;
     return 0;}
