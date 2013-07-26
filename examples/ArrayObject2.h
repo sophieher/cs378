@@ -19,6 +19,12 @@ using namespace std::rel_ops;
 
 template <typename T, std::size_t N, typename A = std::allocator<T> >
 class ArrayObject2 {
+    friend bool operator == (const ArrayObject2& lhs, const ArrayObject2& rhs) {
+        return std::equal(lhs.begin(), lhs.end(), rhs.begin());}
+
+    friend bool operator < (const ArrayObject2& lhs, const ArrayObject2& rhs) {
+        return std::lexicographical_compare(lhs.begin(), lhs.end(), rhs.begin(), rhs.end());}
+
     public:
         typedef A                                        allocator_type;
         typedef typename allocator_type::value_type      value_type;
@@ -87,13 +93,5 @@ class ArrayObject2 {
 
         size_type size () const {
             return N;}};
-
-template <typename T, std::size_t N>
-bool operator == (const ArrayObject2<T, N>& lhs, const ArrayObject2<T, N>& rhs) {
-    return std::equal(lhs.begin(), lhs.end(), rhs.begin());}
-
-template <typename T, std::size_t N>
-bool operator < (const ArrayObject2<T, N>& lhs, const ArrayObject2<T, N>& rhs) {
-    return std::lexicographical_compare(lhs.begin(), lhs.end(), rhs.begin(), rhs.end());}
 
 #endif // ArrayObject2_h

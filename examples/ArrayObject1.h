@@ -16,6 +16,12 @@ using namespace std::rel_ops;
 
 template <typename T, std::size_t N>
 class ArrayObject1 {
+    friend bool operator == (const ArrayObject1& lhs, const ArrayObject1& rhs) {
+        return std::equal(lhs.begin(), lhs.end(), rhs.begin());}
+
+    friend bool operator < (const ArrayObject1& lhs, const ArrayObject1& rhs) {
+        return std::lexicographical_compare(lhs.begin(), lhs.end(), rhs.begin(), rhs.end());}
+
     public:
         typedef T                 value_type;
 
@@ -75,13 +81,5 @@ class ArrayObject1 {
 
         size_type size () const {
             return N;}};
-
-template <typename T, std::size_t N>
-bool operator == (const ArrayObject1<T, N>& lhs, const ArrayObject1<T, N>& rhs) {
-    return std::equal(lhs.begin(), lhs.end(), rhs.begin());}
-
-template <typename T, std::size_t N>
-bool operator < (const ArrayObject1<T, N>& lhs, const ArrayObject1<T, N>& rhs) {
-    return std::lexicographical_compare(lhs.begin(), lhs.end(), rhs.begin(), rhs.end());}
 
 #endif // ArrayObject1_h
