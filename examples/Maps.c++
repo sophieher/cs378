@@ -90,11 +90,13 @@ void maps (
     {
     C x;
     std::pair<iterator, bool> p = x.insert(value_type(k1, v1));
-    assert(p.first  == x.begin());
-    assert(p.second == true);
-    std::pair<iterator, bool> q = x.insert(value_type(k1, v1));
-    assert(q.first  == x.begin());
-    assert(q.second == false);
+    assert(x.find(k1)->second == v1);
+    assert(p.first            == x.begin());
+    assert(p.second           == true);
+    std::pair<iterator, bool> q = x.insert(value_type(k1, v2));
+    assert(x.find(k1)->second == v1);
+    assert(q.first            == x.begin());
+    assert(q.second           == false);
     }
 
     {
