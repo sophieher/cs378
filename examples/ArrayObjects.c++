@@ -2,7 +2,7 @@
 // ArrayObjects.c++
 // ----------------
 
-#include <algorithm> // copy, equal, fill, lexicographical_compare
+#include <algorithm> // copy, count, equal, fill, lexicographical_compare
 #include <cassert>   // assert
 #include <cstddef>   // ptrdiff_t, size_t
 #include <cstring>   // strcmp
@@ -24,15 +24,13 @@ void array_objects (
     {
     const T x;
     assert(x.size() == 3);
-    const int a[] = {0, 0, 0};
-    assert(std::equal(x.begin(), x.end(), a) == true);
+    assert(std::count(x.begin(), x.end(), 0) == 3);
     }
 
     {
     const T x(v1);
     assert(x.size() == 3);
-    const int a[] = {v1, v1, v1};
-    assert(std::equal(x.begin(), x.end(), a) == true);
+    assert(std::count(x.begin(), x.end(), v1) == 3);
     }
 
     {

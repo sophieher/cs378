@@ -67,7 +67,7 @@ int main () {
 
 //  transform_1(a, a + s, x, sqre_2<int>()); // error: cannot convert 'sqre_2' to 'int (*)(int)' for argument '4' to 'int* transform_1(const int*, const int*, int*, int (*)(int))'
 //  assert(equal(x, x + s, b));
-//  transform_1(a, a + s, x, cube_2()); // error: cannot convert 'cube_2' to 'int (*)(int)' for argument '4' to 'int* transform_1(const int*, const int*, int*, int (*)(int))'
+//  transform_1(a, a + s, x, cube_2<int>()); // error: cannot convert 'cube_2' to 'int (*)(int)' for argument '4' to 'int* transform_1(const int*, const int*, int*, int (*)(int))'
 //  assert(equal(x, x + s, c));
 
     transform_2(a, a + s, x, sqre_2<int>());
