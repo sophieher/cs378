@@ -2,6 +2,12 @@
 CS378: Quiz #17 (10 pts) <Ben>
 */
 
+#include <iostream> // boolalpha, cout, endl
+#include <map>      // map
+#include <utility>  // pair
+
+using namespace std;
+
 /* -----------------------------------------------------------------------
 1. What is the output of the following function?
    (5 pts)
@@ -36,3 +42,13 @@ void test_map_2 () {
     pair<iterator, bool> p = x.insert(value_type(2, 3));
     cout << (x[4]     == 0) << " ";
     cout << (x.size() == 1) << endl;}
+
+/* -----------------------------------------------------------------------
+*/
+
+int main () {
+    cout << boolalpha;
+    test_map_1();
+    test_map_2();
+    cout << "Done." << endl;
+    return 0;}

@@ -1,60 +1,66 @@
-// ---------
-// David.c++
-// ---------
+// ------------------------
+// ReserveBackInsterter.c++
+// ------------------------
 
-#include <cassert>  // assert
-#include <iostream> // cout, endl
-#include <list>     // list
-
-struct mammal         {};
-struct tiger : mammal {};
+#include <algorithm>  // copy
+#include <cassert>    // assert
+#include <ctime>      // clock, clock_t, CLOCKS_PER_SEC
+#include <iostream>   // cout, endl
+#include <iterator>   // back_inserter
+#include <vector>     // vector
 
 int main () {
     using namespace std;
-    cout << "Test.c++" << endl;
+    cout << "ReserveBackInsterter.c++" << endl;
 
-    // The quick, but somewhat obtuse, answer to your question is that
-    // containers in C++ are not covariant.
+    const vector<int>                 x(1000000, 1);
+    const vector<int>::const_iterator b = x.begin();
+    const vector<int>::const_iterator e = x.end();
 
-    // That is, if tiger is a child of mammal, that does NOT make list<tiger>
-    // a child of list<mammal>.
+    {
+    cout << "test_1" << endl;
+    const clock_t cs = clock();
 
-    // This is legal, because tiger is a child of mammal.
-    tiger   x;
-    mammal* p = &x;
+    vector<int> y(distance(b, e));
+    copy(b, e, y.begin());
 
-    // This is not legal, because list<tiger> is NOT a child of list<mammal>;
-    list<tiger>   y;
-//  list<mammal>* q = &y; // error: cannot convert ‘std::list<tiger>*’ to
-                          // ‘std::list<mammal>*’ in initialization
+    const clock_t ct = clock();
+    const clock_t cd = ct - cs;
+    cout << (cd * 1000.0 / CLOCKS_PER_SEC) << " milliseconds" << endl;
+    cout << endl;
+    }
 
-    // Casting makes it compile, but it's not reasonable.
-    list<mammal>* q = (list<mammal>*)(&y);
+    {
+    cout << "test_2" << endl;
+    const clock_t cs = clock();
 
-    // Why is it not reasonable?
+    vector<int> y;
+    y.reserve(distance(b, e));
+    copy(b, e, back_inserter(y));
 
-    // Consider the following attempt to add a tiger to a list<tiger>.
-    // That's reasonable.
-    list<tiger> z;
-    z.push_back(tiger());
-
-    // Now consider the following attempt to add a mammal to a list<tiger>.
-    // That's NOT reasonable.
-//  z.push_back(mammal()); // error: no matching function for call to
-                           // ‘std::list<tiger>::push_back(mammal)’
-
-    // It's not reasonable, because list<tiger> contains only tigers.
-    // And we're trying to add a mammal.
-    // All mammals are not tigers.
-
-    // The reason your original code doesn't compile, is to prevent this mistake.
-    // If you force the issue with a cast, it will compile, but list<tiger> will still
-    // only contain tigers, and you'll then be forcing it to accepts mammals.
-    q->push_back(mammal());
-
-    // Really, what you've facilitated is this, which doesn't compile.
-    mammal m;
-//  tiger  t = m; // error: conversion from ‘mammal’ to non-scalar type ‘tiger’ requested
+    const clock_t ct = clock();
+    const clock_t cd = ct - cs;
+    cout << (cd * 1000.0 / CLOCKS_PER_SEC) << " milliseconds" << endl;
+    cout << endl;
+    }
 
     cout << "Done." << endl;
     return 0;}
+
+/*
+Target: i686-apple-darwin11
+gcc version 4.2.1 (Based on Apple Inc. build 5658) (LLVM build 2336.11.00)
+
+MapReduce.c++
+
+map_reduce_1
+137.156 milliseconds
+
+map_reduce_2
+277.218 milliseconds
+
+map_reduce_3
+349.918 milliseconds
+
+Done.
+*/
