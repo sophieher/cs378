@@ -5,6 +5,10 @@ CS378: Quiz #20 (10 pts) <Tom>
 /* -----------------------------------------------------------------------
 1. What is the output of the following program?
    (9 pts)
+
+true true abcx
+true
+true true abcxx
 */
 
 #include <iostream> // boolalpha, cout, endl
