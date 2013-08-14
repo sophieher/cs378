@@ -16,13 +16,13 @@
 
 template <typename T, typename U>
 void array_objects (
-        const typename T::value_type& v1,
-        const typename T::value_type& v2,
-        const typename T::value_type& v3,
-        const typename U::value_type& w) {
+        const typename T::value_type& v1,   // int 2
+        const typename T::value_type& v2,   // int 3
+        const typename T::value_type& v3,   // int 4
+        const typename U::value_type& w) {  // double 5.6
 
     {
-    const T x;
+    const T x;  // ArrayObjectXX<int, 3> default constructor gives initialized array default int()
     assert(x.size() == 3);
     assert(std::count(x.begin(), x.end(), 0) == 3);
     }

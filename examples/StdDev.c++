@@ -10,17 +10,9 @@
 #include <numeric>    // accumulate
 #include <vector>     // vector
 
-template <typename II, typename T>
-T mean (II b, II e, T v) {
-    v = std::accumulate(b, e, v);
-    if (v == 0)
-        return 0;
-    return v / std::distance(b, e);}
+#include "StdDev.h"
 
-template <typename T>
-struct sqre : std::unary_function<T, T> {
-    T operator () (const T& v) {
-        return v * v;}};
+
 
 // square root of the mean of the squares of the differences with the mean
 template <typename II, typename T>
