@@ -7,7 +7,7 @@
 #include <limits>   // numeric_limits
 #include <sstream>  // ostringstream
 
-template <typename T>
+template <typename T>	// make generic type
 struct A {
     int    i;
     double d;
@@ -54,15 +54,15 @@ int main () {
     assert(numeric_limits<unsigned int>::max() ==  4294967295U);
 
     long j = 2L;
-    assert(sizeof(j)    ==  8);
-    assert(sizeof(long) ==  8);
+    assert(sizeof(j)    ==  4);
+    assert(sizeof(long) ==  4);
     assert(numeric_limits<         long>::min() == -9223372036854775807L - 1);
     assert(numeric_limits<         long>::max() ==  9223372036854775807L);
     assert(numeric_limits<unsigned long>::min() ==                    0);
     assert(numeric_limits<unsigned long>::max() == 18446744073709551615UL);
 
     float f = 2.34F;
-    assert(sizeof(f)     == 4);
+    assert(sizeof(f)     == 4);	// sizeof() is really a macro
     assert(sizeof(float) == 4);
     {
     ostringstream out;
@@ -117,7 +117,7 @@ int main () {
     assert(sizeof(A<double>) == 24);
     assert(sizeof(x2)        == 24);
 
-    A< A<int> > x3 = {2, 3.45, {2, 3.45, 6}};
+    A< A<int> > x3 = {2, 3.45, {2, 3.45, 6}};  // create an A of A of ints, type of A is A<int> 
     assert(sizeof(A< A<int> >) == 40);
     assert(sizeof(x3)          == 40);
 
@@ -128,6 +128,7 @@ int main () {
     assert(sizeof(u2) == 8);
 
     Color c1 = red;
+	c1 = green;
     Color c2 = green;
     Color c3 = blue;
     assert(sizeof(Color) == 4);

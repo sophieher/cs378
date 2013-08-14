@@ -29,7 +29,7 @@ int main () {
         }
     catch (domain_error& e) {
 //      assert(       e                == "abc");  // error: no match for ‘operator==’ in ‘e == "abc"’
-        assert(       e.what()         != "abc");  // warning: comparison with string literal results in unspecified behavior
+        assert(       e.what()         != "abc");  // compile-time warning: comparison with string literal results in unspecified behavior
         assert(strcmp(e.what(), "abc") == 0);
         assert(string(e.what())        == "abc");}
 
