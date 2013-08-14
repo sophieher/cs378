@@ -29,10 +29,11 @@ void my_reverse (BI b, BI e, std::bidirectional_iterator_tag) {
 
 template <typename RI>
 void my_reverse (RI b, RI e, std::random_access_iterator_tag) {
+    --e;
     while (b < e) {
-        --e;
         std::swap(*b, *e);
-        ++b;}}
+        ++b;
+        --e;}}
 
 template <typename I>
 void my_reverse (I b, I e) {
